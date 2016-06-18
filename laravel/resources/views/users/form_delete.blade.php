@@ -1,4 +1,4 @@
-@extends('master')
+@extends('layouts.app_admin')
 @section('content')
   <?php $users = DB::table('users')->get(); ?>
   <div class="row">

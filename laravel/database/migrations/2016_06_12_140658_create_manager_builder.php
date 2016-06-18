@@ -19,12 +19,11 @@ class CreateManagerBuilder extends Migration
           $table->string('address');
           $table->string('tel');
           $table->string('email')->unique();
-          $table->string('username');
+          $table->string('username')->unique();
           $table->string('password');
           $table->string('permission');
           $table->rememberToken();
           $table->timestamps();
-          $table->softDeletes();
       });
 
       Schema::create('report_user', function (Blueprint $table) {
@@ -48,7 +47,7 @@ class CreateManagerBuilder extends Migration
           $table->increments('id');
           $table->string('detail');
           $table->string('username');
-          $table->string('state');
+          $table->tinyInteger('state');
           $table->timestamps();
       });
 
@@ -56,7 +55,7 @@ class CreateManagerBuilder extends Migration
           $table->increments('id');
           $table->string('title');
           $table->string('type_data');
-          $table->string('money');
+          $table->integer('money');
           $table->string('username');
           $table->timestamps();
       });

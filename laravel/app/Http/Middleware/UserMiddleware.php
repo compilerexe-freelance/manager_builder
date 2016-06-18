@@ -3,9 +3,9 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Support\Facades\Auth;
+use Auth;
 
-class AdminMiddleware
+class UserMiddleware
 {
     /**
      * Handle an incoming request.
@@ -16,7 +16,7 @@ class AdminMiddleware
      */
     public function handle($request, Closure $next)
     {
-      if (Auth::check() && Auth::user()->permission == "ผู้ดูแลระบบ") {
+      if (Auth::check() && Auth::user()->permission == "ผู้ใช้งานระบบ") {
         return $next($request);
       } else {
         abort(503);

@@ -12,9 +12,9 @@
 */
 
 // Auth
-Route::get('/',                       'AuthController@getLogin');
-Route::post('/login',                 'AuthController@postLogin');
-Route::get('admin_panel',             'AdminController@index');
+Route::get('/',                                  'AuthController@getLogin');
+Route::post('/login',                            'AuthController@postLogin');
+Route::get('admin_panel',                        'AdminController@index');
 Route::get('logout',['as'=>'logout','uses' =>    'AuthController@getLogout']);
 
 // UsersController
@@ -30,3 +30,4 @@ Route::post('/save_edit',             'UsersController@save_edit');
 
 // Home for user
 Route::get('home',                    'HomeController@index');
+Route::get('/report',                 'HomeController@getReport');

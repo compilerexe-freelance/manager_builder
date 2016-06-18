@@ -9,11 +9,16 @@ class HomeController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('admin');
+        $this->middleware('user');
     }
 
     public function index()
     {
         return view('home');
+    }
+
+    public function getReport()
+    {
+
     }
 }

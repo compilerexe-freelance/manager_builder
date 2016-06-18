@@ -1,6 +1,4 @@
-@extends('master')
+@extends('layouts.app_admin')
 @section('content')
-  <?php
-    // echo Auth::user()->permission;
-  ?>
+
 @endsection

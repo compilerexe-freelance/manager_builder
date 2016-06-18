@@ -11,7 +11,8 @@ use App\Http\Requests\RequestDataUsers;
 use DB;
 use App\Record_Users;
 use Hash;
-// use Auth;
+use Auth;
+use Crypt;
 
 class UsersController extends Controller
 {
@@ -59,21 +60,37 @@ class UsersController extends Controller
 
   public function save_edit(RequestDataUsers $request) {
     $users = new Record_Users;
-    $users::where('id',$request->get('id'))->update([
-      'name'      =>  $request->get('name'),
-      'address'   =>  $request->get('address'),
-      'tel'       =>  $request->get('tel'),
-      'email'     =>  $request->get('email'),
-      'username'  =>  $request->get('username'),
-      'password'  =>  $request->get('password')
-    ]);
+    $old_password = $users::select('password')->where('id', $request->get('id'))->first();
+
+    if ($request->get('password') == $old_password->password) {
+      $users::where('id',$request->get('id'))->update([
+        'name'      =>  $request->get('name'),
+        'address'   =>  $request->get('address'),
+        'tel'       =>  $request->get('tel'),
+        'email'     =>  $request->get('email')
+      ]);
+    } else {
+      $users::where('id',$request->get('id'))->update([
+        'name'      =>  $request->get('name'),
+        'address'   =>  $request->get('address'),
+        'tel'       =>  $request->get('tel'),
+        'email'     =>  $request->get('email'),
+        'username'  =>  $request->get('username'),
+        'password'  =>  Hash::make($request->get('password'))
+      ]);
+    }
 
     return redirect()->back()->with('status','บันทึกสำเร็จ');
   }
 
   public function delete_user($id) {
     $users = new Record_Users;
-    $users::onlyTrashed()->where('id', $id)->get();
+    // DB::table('users')->where('id', $id)->delete();
+
+    // $users = new Record_Users;
+    $users::where('id', $id)->delete();
+    // $users::onlyTrashed()->where('id', $id)->get();
+    return redirect()->back();
   }
   // ===== end process =====
 

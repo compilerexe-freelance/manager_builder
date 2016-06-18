@@ -15,7 +15,15 @@ use Auth;
 class AuthController extends Controller
 {
   public function getLogin() {
-    return view('login');
+    if (Auth::check()) {
+      if (Auth::user()->permission == "ผู้ใช้งานระบบ") {
+        return redirect('home');
+      } else {
+        return redirect('admin_panel');
+      }
+    } else {
+      return view('login');
+    }
   }
 
   public function postLogin(Request $request) {
