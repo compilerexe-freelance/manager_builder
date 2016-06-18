@@ -1,0 +1,11 @@
+.table-borderless tbody tr td, .table-borderless tbody tr th, .table-borderless thead tr th {
+      border: none;
+}
+
+.table tr th {
+  text-align: center;
+}
+
+.table tr td {
+  text-align: center;
+}

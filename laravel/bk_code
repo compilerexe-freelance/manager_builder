@@ -1,0 +1,57 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+// use Illuminate\Support\Facades\Auth;
+// use Illuminate\Contracts\Auth\Authenticatable;
+// use Illuminate\Auth\Authenticable as AuthenticableTrait;
+
+use App\Http\Requests;
+use App\Record_Users;
+use App\User;
+use Auth;
+
+class AuthController extends Controller
+{
+
+  protected $guard = 'admin';
+
+  public function getLogin() {
+    return view('login');
+  }
+
+  public function postLogin(Request $request) {
+    $getUser = $request->get('username');
+    $getPass = $request->get('password');
+    if ($getUser == "" || $getPass == "") {
+      return redirect()->back()->with([
+        'status'=>'กรุณาตรวจสอบชื่อผู้ใช้งานและรหัสผ่านอีกครั้ง',
+        'username'=>$getUser
+      ]);
+    }
+
+
+
+    $users = new Record_Users;
+    $users = $users::select('username','password','permission')->where('username', $getUser)->get();
+    foreach ($users as $user) {
+      if ($getUser == $user->username && $getPass == $user->password) {
+
+        return redirect()->action('AdminController@index');
+
+      } else {
+        return redirect()->back()->with([
+          'status'=>'กรุณาตรวจสอบชื่อผู้ใช้งานและรหัสผ่านอีกครั้ง',
+          'username'=>$getUser
+        ]);
+      }
+    }
+  }
+
+  public function getLogout() {
+    Auth::logout();
+    return redirect()->action('AuthController@getLogin');
+  }
+
+}
