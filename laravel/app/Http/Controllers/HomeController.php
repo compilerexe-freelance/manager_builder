@@ -8,6 +8,7 @@ use Validator;
 use DB;
 use Auth;
 use Input;
+use Schema;
 
 class HomeController extends Controller
 {
@@ -112,21 +113,24 @@ class HomeController extends Controller
                 ]);
             }
         }
-        return redirect()->back()->with('status', 'บันทึกโครงการสำเร็จ');
+        return redirect('project')->with('status', 'บันทึกโครงการสำเร็จ');
     }
 
     public function getViewProject($id)
     {
+        session(['current_menu'=>'project']);
         return view('project/view_project')->with('id', $id);
     }
 
     public function getProjectEdit()
     {
+        session(['current_menu'=>'project']);
         return view('project/project_edit');
     }
 
     public function getProjectEditId($id)
     {
+        session(['current_menu'=>'project']);
         return view('project/project_edit_id')->with('id', $id);
     }
 
@@ -168,17 +172,110 @@ class HomeController extends Controller
                 ]);
             }
         }
-        return redirect()->back()->with('status', 'แก้ไขโครงการสำเร็จ');
+        return redirect('/project_edit')->with('status', 'แก้ไขโครงการสำเร็จ');
     }
 
     public function getProjectDelete()
     {
+        session(['current_menu'=>'project']);
         return view('project/project_delete');
     }
 
     public function getProjectDeleteId($id)
     {
         DB::table('project_detail')->where('id', $id)->delete();
+        Schema::table('project_detail', function($table){
+            $table->dropColumn('id');
+        });
+        Schema::table('project_detail', function($table){
+            $table->increments('id');
+        });
         return redirect('/project_delete')->with('status','ลบโครงการสำเร็จ');
+    }
+
+    // ===== List =====
+
+    public function getListAdd()
+    {
+        session(['current_menu'=>'list']);
+        return view('list/list_add');
+    }
+
+    public function getViewList($id)
+    {
+        session(['current_menu'=>'list']);
+        return view('list/view_list')->with('id', $id);
+    }
+
+    public function postListAdd(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'detail' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator);
+        } else {
+            DB::table('list_buy')->insert([
+                'code'        =>  $request->get('code'),
+                'detail'      =>  $request->get('detail'),
+                'username'    =>  Auth::user()->username,
+                'created_at'  => date('Y-m-d h:i:s'),
+                'updated_at'  => date('Y-m-d h:i:s')
+            ]);
+        }
+        return redirect('/list')->with('status', 'บันทึกรายการสั่งซื้อสำเร็จ');
+    }
+
+    public function getList()
+    {
+        session(['current_menu'=>'list']);
+        return view('list/list');
+    }
+
+    public function getListEdit()
+    {
+        session(['current_menu'=>'list']);
+        return view('list/list_edit');
+    }
+
+    public function getListEditId($id)
+    {
+        session(['current_menu'=>'list']);
+        return view('list/list_edit_id')->with('id', $id);
+    }
+
+    public function postListEditId(Request $request)
+    {
+        $validator = Validator::make($request->all(),[
+            'detail'  =>  'required'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        } else {
+            DB::table('list_buy')->where('id', $request->get('id'))->update([
+                'detail'  =>  $request->get('detail')
+            ]);
+        }
+        return redirect('list_edit')->with('status','แก้ไขรายการสั่งซื้อสำเร็จ');
+    }
+
+    public function getListDelete()
+    {
+        session(['current_menu'=>'list']);
+        return view('list/list_delete');
+    }
+
+    public function getListDeleteId($id)
+    {
+        DB::table('list_buy')->where('id', $id)->delete();
+        Schema::table('list_buy', function($table){
+            $table->dropColumn('id');
+        });
+        Schema::table('list_buy', function($table){
+            $table->increments('id');
+        });
+        return redirect('/list_delete')->with('status','ลบรายการสั่งซื้อสำเร็จ');
     }
 }

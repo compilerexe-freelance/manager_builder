@@ -56,6 +56,9 @@
 
             <div class="form-group">
               <div class="col-md-6 col-md-offset-4 text-right">
+                <a href="{{ url('/project_edit') }}" style="margin-right:5px">
+                  <button type="button" class="btn btn-info"><i class="fa fa-btn fa-angle-left"></i> ย้อนกลับ</button>
+                </a>
                 <button type="submit" class="btn btn-success">
                   <i class="fa fa-btn fa-save"></i> บันทึกการแก้ไข
                 </button>

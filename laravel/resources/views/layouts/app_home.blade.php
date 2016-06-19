@@ -65,7 +65,7 @@
                     <li class="dropdown">
                     @endif
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                             บันทึกรายงาน<span class="caret"></span>
+                             จัดการข้อมูลรายงาน<span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="{{ url('/report') }}">รายงานทั้งหมด</a></li>
@@ -89,7 +89,23 @@
                         </ul>
                     </li>
 
-                    <li><a href="{{ url('/buy_list') }}">เพิ่มรายการสั่งซื้อวัสดุ</a></li>
+                    @if (session('current_menu') == 'list')
+                    <li class="dropdown active">
+                    @else
+                    <li class="dropdown">
+                    @endif
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                             จัดการข้อมูลการสั่งซื้อ<span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="{{ url('/list') }}">รายการสั่งซื้อทั้งหมด</a></li>
+                            <li><a href="{{ url('/list_add') }}">เพิ่มรายการสั่งซื้อ</a></li>
+                            <li><a href="{{ url('/list_edit') }}">แก้ไขรายการสั่งซื้อ</a></li>
+                            <li><a href="{{ url('/list_delete') }}">ลบรายการสั่งซื้อ</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- <li><a href="{{ url('/buy_list') }}">เพิ่มรายการสั่งซื้อวัสดุ</a></li> -->
                 </ul>
 
                 <!-- Right Side Of Navbar -->

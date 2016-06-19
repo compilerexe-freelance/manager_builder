@@ -43,8 +43,9 @@ class CreateManagerBuilder extends Migration
           $table->timestamps();
       });
 
-      Schema::create('buy_list', function (Blueprint $table) {
+      Schema::create('list_buy', function (Blueprint $table) {
           $table->increments('id');
+          $table->string('code');
           $table->string('detail');
           $table->string('username');
           $table->tinyInteger('state');
