@@ -3,7 +3,7 @@
 @section('content')
   <div class="container">
     <div class="row">
-      <div class="col-md-8 col-md-offset-2">
+      <div class="col-md-10 col-md-offset-1">
         @if (session('status'))
           <div class="alert alert-success text-center">
             <strong>{!! session('status') !!}</strong>
@@ -122,11 +122,11 @@
               </div>
 
               <div class="form-group">
-              <div class="col-md-6 col-md-offset-4 text-center">
-              <button type="submit" class="btn btn-success">
-              <i class="fa fa-btn fa-user"></i> เพิ่มผู้ใช้งาน
-              </button>
-              </div>
+                <div class="col-md-6 col-md-offset-4 text-center">
+                  <button type="submit" class="btn btn-success">
+                    <i class="fa fa-btn fa-user"></i> เพิ่มผู้ใช้งาน
+                  </button>
+                </div>
               </div>
             </form>
           </div>

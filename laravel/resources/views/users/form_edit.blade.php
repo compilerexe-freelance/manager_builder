@@ -26,7 +26,7 @@
                   <td>{!! $user->name !!}</td>
                   <td>{!! $user->username !!}</td>
                   <td>{!! $user->permission !!}</td>
-                  <td><a href="edit_user/{!! $user->id !!}"><button type="submit" class="btn btn-warning" style="width:100%">แก้ไข</button></a></td>
+                  <td><a href="edit_user/{!! $user->id !!}"><button type="submit" class="btn btn-warning" style="width:100%"><i class="fa fa-btn fa-repeat"></i> แก้ไข</button></a></td>
                 </tr>
                 @endforeach
               </table>

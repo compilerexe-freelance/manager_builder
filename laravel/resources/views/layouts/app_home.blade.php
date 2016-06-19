@@ -10,6 +10,7 @@
     <!-- Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700">
+    <link rel="stylesheet" href="{{ URL::asset('assets/css/master.css') }}">
 
     <!-- Styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -47,20 +48,47 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/home') }}">หน้าแรก</a></li>
+
+                    @if (session('current_menu') == 'home')
+                    <li class="active">
+                    @else
+                    <li>
+                    @endif
+                      <a href="{{ url('/home') }}">หน้าแรก</a>
+                    </li>
+
                     <li><a href="{{ url('/member_group') }}">จัดการข้อมูลสมาชิก</a></li>
 
+                    @if (session('current_menu') == 'report')
+                    <li class="dropdown active">
+                    @else
                     <li class="dropdown">
+                    @endif
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                              บันทึกรายงาน<span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="{{ url('/report') }}">รายละเอียดรายงาน</a></li>
+                            <li><a href="{{ url('/report') }}">รายงานทั้งหมด</a></li>
                             <li><a href="{{ url('/send_report') }}">ส่งรายงาน</a></li>
                         </ul>
                     </li>
 
-                    <li><a href="{{ url('/project_detail') }}">จัดการข้อมูลโครงการ</a></li>
+                    @if (session('current_menu') == 'project')
+                    <li class="dropdown active">
+                    @else
+                    <li class="dropdown">
+                    @endif
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                             จัดการข้อมูลโครงการ<span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="{{ url('/project') }}">โครงการทั้งหมด</a></li>
+                            <li><a href="{{ url('/project_add') }}">เพิ่มโครงการ</a></li>
+                            <li><a href="{{ url('/project_edit') }}">แก้ไขโครงการ</a></li>
+                            <li><a href="{{ url('/project_delete') }}">ลบโครงการ</a></li>
+                        </ul>
+                    </li>
+
                     <li><a href="{{ url('/buy_list') }}">เพิ่มรายการสั่งซื้อวัสดุ</a></li>
                 </ul>
 

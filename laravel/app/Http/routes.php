@@ -30,4 +30,18 @@ Route::post('/save_edit',             'UsersController@save_edit');
 
 // Home for user
 Route::get('home',                    'HomeController@index');
+// Report
 Route::get('/report',                 'HomeController@getReport');
+Route::get('/send_report',            'HomeController@getSendReport');
+Route::post('/send_report',           'HomeController@postSendReport');
+Route::get('/view_report/{id}',       'HomeController@getViewReport');
+// Project
+Route::get('/project',                'HomeController@getProject');
+Route::get('/view_project/{id}',      'HomeController@getViewProject');
+Route::get('/project_add',            'HomeController@getProjectAdd');
+Route::post('/project_add',           'HomeController@postProjectAdd');
+Route::get('/project_edit',           'HomeController@getProjectEdit');
+Route::get('/project_edit/{id}',      'HomeController@getProjectEditId');
+Route::post('/project_edit',          'HomeController@postProjectEditId');
+Route::get('/project_delete',         'HomeController@getProjectDelete');
+Route::get('/project_delete/{id}',     'HomeController@getProjectDeleteId');

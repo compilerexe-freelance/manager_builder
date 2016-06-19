@@ -25,7 +25,7 @@
                 <td>{!! $user->name !!}</td>
                 <td>{!! $user->username !!}</td>
                 <td>{!! $user->permission !!}</td>
-                <td><a href="delete_user/{!! $user->id !!}"><button type="submit" class="btn btn-danger" style="width:100%">ลบ</button></a></td>
+                <td><a href="delete_user/{!! $user->id !!}"><button type="submit" class="btn btn-danger" style="width:100%"><i class="fa fa-btn fa-recycle"></i> ลบ</button></a></td>
               </tr>
               @endforeach
             </table>
