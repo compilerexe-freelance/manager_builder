@@ -57,3 +57,13 @@ Route::get('/list_edit/{id}',         'HomeController@getListEditId');
 Route::post('/list_edit',             'HomeController@postListEditId');
 Route::get('/list_delete',            'HomeController@getListDelete');
 Route::get('/list_delete/{id}',       'HomeController@getListDeleteId');
+// Member
+Route::get('/member',                 'HomeController@getMember');
+Route::get('/view_member/{id}',       'HomeController@getViewMember');
+Route::get('/member_add',             'HomeController@getMemberAdd');
+Route::post('/member_add',            'HomeController@postMemberAdd');
+Route::get('/member_edit',            'HomeController@getMemberEdit');
+Route::get('/member_edit/{id}',       'HomeController@getMemberEditId');
+Route::post('/member_edit_id',        'HomeController@postMemberEditId');
+Route::get('/member_delete',          'HomeController@getMemberDelete');
+Route::get('/member_delete/{id}',     'HomeController@getMemberDeleteId');

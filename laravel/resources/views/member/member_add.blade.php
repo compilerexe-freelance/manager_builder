@@ -1,4 +1,4 @@
-@extends('layouts.app_admin')
+@extends('layouts.app_home')
 
 @section('content')
   <div class="container">
@@ -10,15 +10,15 @@
           </div>
         @endif
         <div class="panel panel-default">
-          <div class="panel-heading">เพิ่มข้อมูลสมาชิก</div>
+          <div class="panel-heading">เพิ่มสมาชิกหน่วยงาน</div>
           <div class="panel-body">
-            <form class="form-horizontal" role="form" method="POST" action="{{ url('/insert_user') }}">
+            <form class="form-horizontal" role="form" method="POST" action="{{ url('/member_add') }}">
               {{ csrf_field() }}
 
               <div class="form-group">
                 <label for="code" class="col-md-4 control-label">รหัสสมาชิก</label>
                 <div class="col-md-6">
-                  <input id="code" type="text" class="form-control" name="code" value="<?php echo rand(0,999999999); ?>" readonly="readonly">
+                  <input id="code" type="text" class="form-control" name="code" value="<?php echo Auth::user()->username.'-'.rand(0,999999999); ?>" readonly="readonly">
                 </div>
               </div>
 
@@ -110,8 +110,7 @@
                 <label for="permission" class="col-md-4 control-label">สิทธิ์การใช้งานระบบ</label>
                 <div class="col-md-6">
                   <select class="form-control" name="permission">
-                    <option>ผู้ใช้งานระบบ</option>
-                    <option>ผู้ดูแลระบบ</option>
+                    <option>สมาชิกหน่วยงาน</option>
                   </select>
                   @if ($errors->has('permission'))
                     <span class="help-block">
@@ -122,9 +121,9 @@
               </div>
 
               <div class="form-group">
-                <div class="col-md-6 col-md-offset-4 text-center">
+                <div class="col-md-6 col-md-offset-4 text-right">
                   <button type="submit" class="btn btn-success">
-                    <i class="fa fa-btn fa-user"></i> เพิ่มผู้ใช้งาน
+                    <i class="fa fa-btn fa-user"></i> เพิ่มสมาชิก
                   </button>
                 </div>
               </div>

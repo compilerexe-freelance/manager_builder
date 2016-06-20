@@ -57,7 +57,21 @@
                       <a href="{{ url('/home') }}">หน้าแรก</a>
                     </li>
 
-                    <li><a href="{{ url('/member_group') }}">จัดการข้อมูลสมาชิก</a></li>
+                    @if (session('current_menu') == 'member')
+                    <li class="dropdown active">
+                    @else
+                    <li class="dropdown">
+                    @endif
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                             จัดการข้อมูลสมาชิก<span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="{{ url('/member') }}">สมาชิกภายในหน่วยงาน</a></li>
+                            <li><a href="{{ url('/member_add') }}">เพิ่มสมาชิก</a></li>
+                            <li><a href="{{ url('/member_edit') }}">แก้ไขสมาชิก</a></li>
+                            <li><a href="{{ url('/member_delete') }}">ลบสมาชิก</a></li>
+                        </ul>
+                    </li>
 
                     @if (session('current_menu') == 'report')
                     <li class="dropdown active">

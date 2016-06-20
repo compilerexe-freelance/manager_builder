@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
+use App\Http\Requests\RequestDataUsers;
+use App\Record_Users;
 use Illuminate\Http\Request;
 use Validator;
 use DB;
 use Auth;
 use Input;
 use Schema;
+use Hash;
 
 class HomeController extends Controller
 {
@@ -278,4 +281,105 @@ class HomeController extends Controller
         });
         return redirect('/list_delete')->with('status','ลบรายการสั่งซื้อสำเร็จ');
     }
+
+    // ===== Member =====
+
+    public function getMember()
+    {
+        session(['current_menu'=>'member']);
+        return view('member/member');
+    }
+
+    public function getViewMember($id)
+    {
+        session(['current_menu'=>'member']);
+        return view('member/view_member')->with('id', $id);
+    }
+
+    public function getMemberAdd()
+    {
+        session(['current_menu'=>'member']);
+        return view('member/member_add');
+    }
+
+    public function postMemberAdd(RequestDataUsers $request)
+    {
+        $Record             = new Record_Users;
+        $Record->code       = $request->get('code');
+        $Record->name       = $request->get('name');
+        $Record->address    = $request->get('address');
+        $Record->tel        = $request->get('tel');
+        $Record->email      = $request->get('email');
+        $Record->username   = $request->get('username');
+        $Record->password   = Hash::make($request->get('password'));
+        $Record->permission = $request->get('permission');
+        $Record->save();
+        return redirect('/member')->with('status','เพิ่มสมาชิกสำเร็จ');
+    }
+
+    public function getMemberEdit()
+    {
+        session(['current_menu'=>'member']);
+        return view('member/member_edit');
+    }
+
+    public function getMemberEditId($id)
+    {
+        session(['current_menu'=>'member']);
+        return view('member/member_edit_id')->with('id', $id);
+    }
+
+    public function postMemberEditId(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name'                    =>  'required',
+            'address'                 =>  'required',
+            'tel'                     =>  'required',
+            'email'                   =>  'required',
+            'password'                =>  'required',
+            'password_confirmation'   =>  'required'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        } else {
+            $password_old = DB::table('users')->where('id', $request->get('id'))->first();
+            if ($request->get('password') == $password_old) {
+                DB::table('users')->where('id', $request->get('id'))->update([
+                    'name'  =>  $request->get('name'),
+                    'address'   =>  $request->get('address'),
+                    'tel'       =>  $request->get('tel'),
+                    'email'     =>  $request->get('email')
+                ]);
+            } else {
+                DB::table('users')->where('id', $request->get('id'))->update([
+                    'name'  =>  $request->get('name'),
+                    'address'   =>  $request->get('address'),
+                    'tel'       =>  $request->get('tel'),
+                    'email'     =>  $request->get('email'),
+                    'password'  =>  Hash::make($request->get('password'))
+                ]);
+            }
+        }
+        return redirect('/member')->with('status', 'แก้ไขสมาชิกหน่วยงานสำเร็จ');
+    }
+
+    public function getMemberDelete()
+    {
+        session(['current_menu'=>'member']);
+        return view('member/member_delete');
+    }
+
+    public function getMemberDeleteId($id)
+    {
+        DB::table('users')->where('id', $id)->delete();
+        Schema::table('users', function($table){
+            $table->dropColumn('id');
+        });
+        Schema::table('users', function($table){
+            $table->increments('id');
+        });
+        return redirect('member_delete')->with('status', 'ลบสมาชิกหน่วยงานสำเร็จ');
+    }
+
 }
