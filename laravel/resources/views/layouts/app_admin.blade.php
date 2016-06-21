@@ -48,14 +48,39 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
+
+                  @if (session('current_menu') == 'users')
+                  <li class="dropdown active">
+                  @else
                   <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">ระบบจัดการผู้ใช้งาน <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                      <li><a href="{!! URL('users/form_add') !!}">เพิ่ม</a></li>
-                      <li><a href="{!! URL('users/form_edit') !!}">แก้ไข</a></li>
-                      <li><a href="{!! URL('users/form_delete') !!}">ลบ</a></li>
-                    </ul>
+                  @endif
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                           จัดการข้อมูลสมาชิก<span class="caret"></span>
+                      </a>
+                      <ul class="dropdown-menu" role="menu">
+                          <li><a href="{{ url('users') }}">ผู้ใช้งานทั้งหมด</a></li>
+                          <li><a href="{{ url('users/form_add') }}">เพิ่มสมาชิก</a></li>
+                          <li><a href="{{ url('users/form_edit') }}">แก้ไขสมาชิก</a></li>
+                          <li><a href="{{ url('users/form_delete') }}">ลบสมาชิก</a></li>
+                      </ul>
                   </li>
+
+                  @if (session('current_menu') == 'report')
+                  <li class="dropdown active">
+                  @else
+                  <li class="dropdown">
+                  @endif
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                           จัดการข้อมูลรายงาน<span class="caret"></span>
+                      </a>
+                      <ul class="dropdown-menu" role="menu">
+                          <li><a href="{{ url('/admin/report') }}">รายงานทั้งหมด</a></li>
+                          <li><a href="{{ url('/admin/send_report') }}">เพิ่มรายงาน</a></li>
+                          <li><a href="{{ url('/admin/edit_report') }}">แก้ไขรายงาน</a></li>
+                          <li><a href="{{ url('/admin/delete_report') }}">ลบรายงาน</a></li>
+                      </ul>
+                  </li>
+
                 </ul>
 
                 <!-- Right Side Of Navbar -->

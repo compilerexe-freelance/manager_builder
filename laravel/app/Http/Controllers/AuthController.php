@@ -19,7 +19,7 @@ class AuthController extends Controller
       if (Auth::user()->permission == "ผู้ใช้งานระบบ") {
         return redirect('home');
       } else {
-        return redirect('admin_panel');
+        return redirect('admin/panel');
       }
     } else {
       return view('login');

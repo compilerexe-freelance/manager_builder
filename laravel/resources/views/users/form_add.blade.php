@@ -10,7 +10,7 @@
           </div>
         @endif
         <div class="panel panel-default">
-          <div class="panel-heading">เพิ่มข้อมูลสมาชิก</div>
+          <div class="panel-heading">เพิ่มสมาชิก</div>
           <div class="panel-body">
             <form class="form-horizontal" role="form" method="POST" action="{{ url('/insert_user') }}">
               {{ csrf_field() }}

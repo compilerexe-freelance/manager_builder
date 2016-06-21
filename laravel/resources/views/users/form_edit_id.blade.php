@@ -108,11 +108,14 @@
               </div>
 
               <div class="form-group">
-              <div class="col-md-6 col-md-offset-4 text-center">
-              <button type="submit" class="btn btn-success">
-              <i class="fa fa-btn fa-save"></i> บันทึก
-              </button>
-              </div>
+                <div class="col-md-6 col-md-offset-4 text-right">
+                  <a href="{{ url('users/form_edit') }}" style="margin-right:5px">
+                    <button type="button" class="btn btn-info"><i class="fa fa-btn fa-angle-left"></i> ย้อนกลับ</button>
+                  </a>
+                  <button type="submit" class="btn btn-success">
+                  <i class="fa fa-btn fa-save"></i> บันทึกการแก้ไข
+                  </button>
+                </div>
               </div>
             </form>
           </div>

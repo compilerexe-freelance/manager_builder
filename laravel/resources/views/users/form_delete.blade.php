@@ -2,10 +2,10 @@
 @section('content')
   <?php $users = DB::table('users')->get(); ?>
   <div class="row">
-    <div class="col-md-12">
-      <div class="panel panel-primary">
+    <div class="col-md-10 col-md-offset-1">
+      <div class="panel panel-default">
         <div class="panel-heading">
-          <b>ลบข้อมูลสมาชิก</b>
+          <b>ลบสมาชิก</b>
         </div>
         <div class="panel-body">
           <div class="table-responsive">

@@ -99,7 +99,7 @@
                             <li><a href="{{ url('/project') }}">โครงการทั้งหมด</a></li>
                             <li><a href="{{ url('/project_add') }}">เพิ่มโครงการ</a></li>
                             <li><a href="{{ url('/project_edit') }}">แก้ไขโครงการ</a></li>
-                            <li><a href="{{ url('/project_delete') }}">ลบโครงการ</a></li>
+                            <!-- <li><a href="{{ url('/project_delete') }}">ลบโครงการ</a></li> -->
                         </ul>
                     </li>
 
@@ -115,7 +115,7 @@
                             <li><a href="{{ url('/list') }}">รายการสั่งซื้อทั้งหมด</a></li>
                             <li><a href="{{ url('/list_add') }}">เพิ่มรายการสั่งซื้อ</a></li>
                             <li><a href="{{ url('/list_edit') }}">แก้ไขรายการสั่งซื้อ</a></li>
-                            <li><a href="{{ url('/list_delete') }}">ลบรายการสั่งซื้อ</a></li>
+                            <!-- <li><a href="{{ url('/list_delete') }}">ลบรายการสั่งซื้อ</a></li> -->
                         </ul>
                     </li>
 
