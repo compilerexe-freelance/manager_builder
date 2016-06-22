@@ -16,8 +16,10 @@ class UserMiddleware
      */
     public function handle($request, Closure $next)
     {
-      if (Auth::check() && Auth::user()->permission == "ผู้ใช้งานระบบ") {
-        return $next($request);
+      if (Auth::check()) {
+        if (Auth::user()->permission == "ผู้ใช้งานระบบ" || Auth::user()->permission == "สมาชิกหน่วยงาน") {
+          return $next($request);
+        }
       } else {
         abort(503);
       }

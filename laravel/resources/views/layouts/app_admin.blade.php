@@ -16,6 +16,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
 
+    <!-- Js -->
+    <!-- <script src="{{ URL::asset('assets/js/jquery-2.2.3.min.js') }}"></script> -->
+
     <style>
         body {
             font-family: 'Lato';
@@ -78,6 +81,53 @@
                           <li><a href="{{ url('/admin/send_report') }}">เพิ่มรายงาน</a></li>
                           <li><a href="{{ url('/admin/edit_report') }}">แก้ไขรายงาน</a></li>
                           <li><a href="{{ url('/admin/delete_report') }}">ลบรายงาน</a></li>
+                      </ul>
+                  </li>
+
+                  @if (session('current_menu') == 'project')
+                  <li class="dropdown active">
+                  @else
+                  <li class="dropdown">
+                  @endif
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                           จัดการข้อมูลโครงการ<span class="caret"></span>
+                      </a>
+                      <ul class="dropdown-menu" role="menu">
+                          <li><a href="{{ url('/admin/project/project') }}">โครงการทั้งหมด</a></li>
+                          <li><a href="{{ url('/admin/project/project_add') }}">เพิ่มโครงการ</a></li>
+                          <li><a href="{{ url('/admin/project/project_edit') }}">แก้ไขโครงการ</a></li>
+                          <li><a href="{{ url('/admin/project/project_delete') }}">ลบโครงการ</a></li>
+                      </ul>
+                  </li>
+
+                  @if (session('current_menu') == 'list')
+                  <li class="dropdown active">
+                  @else
+                  <li class="dropdown">
+                  @endif
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                           จัดการข้อมูลการสั่งซื้อ<span class="caret"></span>
+                      </a>
+                      <ul class="dropdown-menu" role="menu">
+                          <li><a href="{{ url('/admin/list/list') }}">รายการสั่งซื้อทั้งหมด</a></li>
+                          <li><a href="{{ url('/admin/list/list_add') }}">เพิ่มรายการสั่งซื้อ</a></li>
+                          <li><a href="{{ url('/admin/list/list_edit') }}">แก้ไขรายการสั่งซื้อ</a></li>
+                          <li><a href="{{ url('/admin/list/list_delete') }}">ลบรายการสั่งซื้อ</a></li>
+                      </ul>
+                  </li>
+
+                  @if (session('current_menu') == 'accounting')
+                  <li class="dropdown active">
+                  @else
+                  <li class="dropdown">
+                  @endif
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                           จัดการข้อมูลการเงิน<span class="caret"></span>
+                      </a>
+                      <ul class="dropdown-menu" role="menu">
+                          <li><a href="{{ url('/admin/accounting/accounting') }}">ข้อมูลการเงินทั้งหมด</a></li>
+                          <li><a href="{{ url('/admin/accounting/accounting_add') }}">เพิ่มรายรับ-รายจ่าย</a></li>
+                          <li><a href="{{ url('/admin/accounting/accounting_delete') }}">ลบรายการ</a></li>
                       </ul>
                   </li>
 

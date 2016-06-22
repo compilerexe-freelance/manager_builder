@@ -40,9 +40,38 @@ Route::get('/admin/edit_report/{id}',   'AdminController@getEditReportId');
 Route::post('/admin/edit_report_id',    'AdminController@postEditReportId');
 Route::get('/admin/delete_report',      'AdminController@getDeleteReport');
 Route::get('/admin/delete_report/{id}', 'AdminController@getDeleteReportId');
+// Project
+Route::get('/admin/project/project',    'AdminController@getProject');
+Route::get('/admin/project/view_project/{id}', 'AdminController@getViewProjectId');
+Route::get('/admin/project/project_add', 'AdminController@getProjectAdd');
+Route::post('/admin/project/project_add', 'AdminController@postProjectAdd');
+Route::get('/admin/project/project_edit', 'AdminController@getProjectEdit');
+Route::get('/admin/project/project_edit/{id}', 'AdminController@getProjectEditId');
+Route::post('/admin/project/project_edit_id', 'AdminController@postProjectEditId');
+Route::get('/admin/project/project_delete', 'AdminController@getProjectDelete');
+Route::get('/admin/project/project_delete/{id}', 'AdminController@getProjectDeleteId');
+// List
+Route::get('/admin/list/list',            'AdminController@getList');
+Route::get('/admin/list/view_list/{id}',  'AdminController@getViewList');
+Route::get('/admin/list/list_add',        'AdminController@getListAdd');
+Route::post('/admin/list/list_add',       'AdminController@postListAdd');
+Route::get('/admin/list/list_edit',       'AdminController@getListEdit');
+Route::get('/admin/list/list_edit/{id}',  'AdminController@getListEditId');
+Route::post('/admin/list/list_edit',      'AdminController@postListEditId');
+Route::get('/admin/list/list_delete',     'AdminController@getListDelete');
+Route::get('/admin/list/list_delete/{id}','AdminController@getListDeleteId');
+// Accounting
+Route::get('/admin/accounting/accounting', 'AdminController@getAccounting');
+Route::get('/admin/accounting/accounting_add', 'AdminController@getAccountingAdd');
+Route::post('/admin/accounting/accounting_add', 'AdminController@postAccountingAdd');
+Route::get('/admin/accounting/accounting_delete', 'AdminController@getAccountingDelete');
+Route::get('/admin/accounting/accounting_delete/{id}', 'AdminController@getAccountingDeleteId');
 
 // ===== For User =====
 Route::get('home',                      'HomeController@index');
+// Info
+Route::get('/info_edit',                'HomeController@getInfoEdit');
+Route::post('/save_info',               'HomeController@postInfoEdit');
 // Report
 Route::get('/report',                   'HomeController@getReport');
 Route::get('/view_report/{id}',         'HomeController@getViewReport');

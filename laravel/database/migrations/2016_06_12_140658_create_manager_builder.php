@@ -57,6 +57,7 @@ class CreateManagerBuilder extends Migration
           $table->string('title');
           $table->string('type_data');
           $table->integer('money');
+          $table->integer('total');
           $table->string('username');
           $table->timestamps();
       });

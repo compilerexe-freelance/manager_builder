@@ -16,7 +16,7 @@ class AuthController extends Controller
 {
   public function getLogin() {
     if (Auth::check()) {
-      if (Auth::user()->permission == "ผู้ใช้งานระบบ") {
+      if (Auth::user()->permission == "ผู้ใช้งานระบบ" || Auth::user()->permission == "สมาชิกหน่วยงาน") {
         return redirect('home');
       } else {
         return redirect('admin/panel');

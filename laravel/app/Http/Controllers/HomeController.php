@@ -26,6 +26,47 @@ class HomeController extends Controller
         return view('home');
     }
 
+    public function getInfoEdit()
+    {
+        session(['current_menu'=>'']);
+        return view('users/info');
+    }
+
+    public function postInfoEdit(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name'                    =>  'required',
+            'address'                 =>  'required',
+            'tel'                     =>  'required',
+            'email'                   =>  'required',
+            'password'                =>  'required',
+            'password_confirmation'   =>  'required'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        } else {
+            $password_old = DB::table('users')->where('username', $request->get('username'))->first();
+            if ($request->get('password') == $password_old) {
+                DB::table('users')->where('username', $request->get('username'))->update([
+                    'name'  =>  $request->get('name'),
+                    'address'   =>  $request->get('address'),
+                    'tel'       =>  $request->get('tel'),
+                    'email'     =>  $request->get('email')
+                ]);
+            } else {
+                DB::table('users')->where('username', $request->get('username'))->update([
+                    'name'  =>  $request->get('name'),
+                    'address'   =>  $request->get('address'),
+                    'tel'       =>  $request->get('tel'),
+                    'email'     =>  $request->get('email'),
+                    'password'  =>  Hash::make($request->get('password'))
+                ]);
+            }
+        }
+        return redirect('/info_edit')->with('status','บันทึกข้อมูลส่วนตัวสำเร็จ');
+    }
+
     public function getReport()
     {
         session(['current_menu'=>'report']);
@@ -165,14 +206,26 @@ class HomeController extends Controller
                     'updated_at'  => date('Y-m-d h:i:s')
                 ]);
             } else {
-                DB::table('project_detail')->where('id', $request->get('id'))->update([
-                    'title'       => $request->get('title'),
-                    'detail'      => $request->get('detail'),
-                    'image'       => '-',
-                    'username'    => Auth::user()->username,
-                    'created_at'  => date('Y-m-d h:i:s'),
-                    'updated_at'  => date('Y-m-d h:i:s')
-                ]);
+                $check_img = DB::table('project_detail')->select('image')->where('id', $request->get('id'));
+                if ($check_img != '-') {
+                    DB::table('project_detail')->where('id', $request->get('id'))->update([
+                        'title'       => $request->get('title'),
+                        'detail'      => $request->get('detail'),
+                        // 'image'       => '-',
+                        'username'    => Auth::user()->username,
+                        'created_at'  => date('Y-m-d h:i:s'),
+                        'updated_at'  => date('Y-m-d h:i:s')
+                    ]);
+                } else {
+                    DB::table('project_detail')->where('id', $request->get('id'))->update([
+                        'title'       => $request->get('title'),
+                        'detail'      => $request->get('detail'),
+                        'image'       => '-',
+                        'username'    => Auth::user()->username,
+                        'created_at'  => date('Y-m-d h:i:s'),
+                        'updated_at'  => date('Y-m-d h:i:s')
+                    ]);
+                }
             }
         }
         return redirect('/project_edit')->with('status', 'แก้ไขโครงการสำเร็จ');
