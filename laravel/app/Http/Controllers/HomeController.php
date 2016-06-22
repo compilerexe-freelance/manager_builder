@@ -47,13 +47,15 @@ class HomeController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
             $password_old = DB::table('users')->where('username', $request->get('username'))->first();
-            if ($request->get('password') == $password_old) {
+
+            if ($request->get('password') == $password_old->password) {
                 DB::table('users')->where('username', $request->get('username'))->update([
                     'name'  =>  $request->get('name'),
                     'address'   =>  $request->get('address'),
                     'tel'       =>  $request->get('tel'),
                     'email'     =>  $request->get('email')
                 ]);
+                // return "old";
             } else {
                 DB::table('users')->where('username', $request->get('username'))->update([
                     'name'  =>  $request->get('name'),
@@ -62,6 +64,7 @@ class HomeController extends Controller
                     'email'     =>  $request->get('email'),
                     'password'  =>  Hash::make($request->get('password'))
                 ]);
+                // return "new";
             }
         }
         return redirect('/info_edit')->with('status','บันทึกข้อมูลส่วนตัวสำเร็จ');
@@ -397,7 +400,7 @@ class HomeController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
             $password_old = DB::table('users')->where('id', $request->get('id'))->first();
-            if ($request->get('password') == $password_old) {
+            if ($request->get('password') == $password_old->password) {
                 DB::table('users')->where('id', $request->get('id'))->update([
                     'name'  =>  $request->get('name'),
                     'address'   =>  $request->get('address'),
